@@ -1,9 +1,40 @@
+<div align="center">
+  <a href="https://github.com/BennyLinntu/GIS">
+    <img src="https://img.icons8.com/color/100/000000/map.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h1 align="center">🌍 GIS Data & Mapping Toolkit</h1>
+
+  <p align="center">
+    A robust and interactive Geographic Information System (GIS) project for spatial data visualization, processing, and analysis.
+    <br />
+    <a href="https://github.com/BennyLinntu/GIS"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/BennyLinntu/GIS/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/BennyLinntu/GIS/issues">Request Feature</a>
+  </p>
+
+  <!-- Badges -->
+  <p align="center">
+    <img src="https://img.shields.io/github/stars/BennyLinntu/GIS?style=for-the-badge&color=ffd700" alt="Stars" />
+    <img src="https://img.shields.io/github/forks/BennyLinntu/GIS?style=for-the-badge&color=c0c0c0" alt="Forks" />
+    <img src="https://img.shields.io/github/issues/BennyLinntu/GIS?style=for-the-badge&color=red" alt="Issues" />
+    <img src="https://img.shields.io/github/license/BennyLinntu/GIS?style=for-the-badge&color=green" alt="License" />
+  </p>
+</div>
+
+<br />
+
+---
+
 ## ✨ Preview
 
 <div align="center">
   <!-- 替换下面这行 src 的 URL 为你真实的代码网页/应用截图链接 -->
   <img src="https://raw.githubusercontent.com/BennyLinntu/GIS/main/screenshot.png" alt="App Screenshot" width="85%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
-  <p><em>▲ 交互式地图与代码执行界面预览 (Interactive Map & Code Interface Preview)</em></p>
+  <p><em>▲ nybb_analysis</em></p>
 </div>
 
 ## 🚀 About The Project
