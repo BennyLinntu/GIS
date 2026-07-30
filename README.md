@@ -33,7 +33,7 @@
 
 <div align="center">
   <!-- 替换下面这行 src 的 URL 为你真实的代码网页/应用截图链接 -->
-  <img src="https://raw.githubusercontent.com/BennyLinntu/GIS/main/screenshot.png" alt="App Screenshot" width="85%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
+  <img src="https://raw.githubusercontent.com/BennyLinntu/GIS/main/nybb_analysis.png" alt="App Screenshot" width="85%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
   <p><em>▲ nybb_analysis</em></p>
 </div>
 
