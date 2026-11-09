@@ -1,129 +1,232 @@
 <div align="center">
-  <a href="https://github.com/BennyLinntu/GIS">
-    <img src="https://img.icons8.com/color/100/000000/map.png" alt="Logo" width="80" height="80">
-  </a>
 
-  <h1 align="center">🌍 GIS Data & Mapping Toolkit</h1>
+# 🗽 NYC Boroughs — GIS Analysis
 
-  <p align="center">
-    A robust and interactive Geographic Information System (GIS) project for spatial data visualization, processing, and analysis.
-    <br />
-    <a href="https://github.com/BennyLinntu/GIS"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/BennyLinntu/GIS/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/BennyLinntu/GIS/issues">Request Feature</a>
-  </p>
+**Five boroughs, one reproducible spatial-analysis pipeline.**
 
-  <!-- Badges -->
-  <p align="center">
-    <img src="https://img.shields.io/github/stars/BennyLinntu/GIS?style=for-the-badge&color=ffd700" alt="Stars" />
-    <img src="https://img.shields.io/github/forks/BennyLinntu/GIS?style=for-the-badge&color=c0c0c0" alt="Forks" />
-    <img src="https://img.shields.io/github/issues/BennyLinntu/GIS?style=for-the-badge&color=red" alt="Issues" />
-    <img src="https://img.shields.io/github/license/BennyLinntu/GIS?style=for-the-badge&color=green" alt="License" />
-  </p>
+A GeoPandas project that loads New York City borough boundaries, projects them to the
+correct local CRS, measures area and perimeter, builds 10,000-ft buffers, compares convex
+hulls, and exports a chart, a CSV, a GeoJSON and an interactive Folium map.
+
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![GeoPandas](https://img.shields.io/badge/GeoPandas-1.2-139C5A?style=for-the-badge&logo=geopandas&logoColor=white)](https://geopandas.org/)
+[![Matplotlib](https://img.shields.io/badge/Matplotlib-3.11-11557C?style=for-the-badge&logo=matplotlib&logoColor=white)](https://matplotlib.org/)
+[![Folium](https://img.shields.io/badge/Folium-0.20-77B829?style=for-the-badge&logo=leaflet&logoColor=white)](https://python-visualization.github.io/folium/)
+[![Tests](https://img.shields.io/badge/tests-7%20passing-0ea5e9?style=for-the-badge&logo=checkmarx&logoColor=white)](#-testing)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+
+[**Open the project**](https://github.com/BennyLinntu/GIS) ·
+[**Report a bug**](https://github.com/BennyLinntu/GIS/issues)
+
 </div>
-
-<br />
 
 ---
 
-## ✨ Preview
+## 🖼️ Preview
 
 <div align="center">
-  <!-- 替换下面这行 src 的 URL 为你真实的代码网页/应用截图链接 -->
-  <img src="https://raw.githubusercontent.com/BennyLinntu/GIS/main/nybb_analysis.png" alt="App Screenshot" width="85%" style="border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" />
-  <p><em>▲ nybb_analysis</em></p>
+  <img src="nybb_analysis.png" alt="Six-panel New York borough spatial analysis" width="94%" />
+  <p><em>Area, density, convex hull, buffers, centroid distance and containment — one figure.</em></p>
 </div>
 
-## 🚀 About The Project
-
-This repository (`BennyLinntu/GIS`) serves as a comprehensive toolset for analyzing and visualizing geospatial data. Whether you are dealing with vector shapes, raster imagery, or creating interactive web maps, this project provides a streamlined pipeline to make your spatial data workflows highly efficient and visually appealing.
-
-### Key Features
-* 🗺️ **Interactive Mapping**: Generate stunning, interactive maps with customizable layers.
-* 🛰️ **Spatial Data Processing**: Fast and reliable operations on raster and vector datasets.
-* 📊 **Data Visualization**: Integrated charts and popups for multi-dimensional data exploration.
-* ⚡ **Optimized Performance**: Built for speed when handling large geographic datasets.
+<p align="center">
+  <a href="my_map.html"><strong>Open the interactive map →</strong></a>
+</p>
 
 ---
 
-## 🛠️ Built With
+## ✨ What it computes
 
-* [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-* [![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)](https://jupyter.org/)
-* *(Add your specific GIS libraries here, e.g., GDAL, Folium, GeoPandas, etc.)*
+| Metric | Method |
+|---|---|
+| 📐 **Area** | Projected polygon area in ft², converted to km² |
+| 📏 **Boundary length** | Projected perimeter in feet, converted to km |
+| 🧭 **Centroid** | Geometric centroid of each borough |
+| 🫧 **10,000-ft buffer** | Planar buffer around each borough |
+| 🎯 **Centroid buffer** | 10,000-ft buffer around each centroid |
+| ↔️ **Distance to Brooklyn** | Centroid-to-centroid distance in km |
+| 🔗 **Buffer intersection** | Does a borough's buffer touch Brooklyn? |
+| 📦 **Containment** | Is the buffered centroid still inside the borough? |
+| 🧩 **Convex hull ratio** | Hull area ÷ borough area; higher means a more irregular shape |
+| 👥 **Density** | 2020 Census population ÷ area in km² |
+
+### Why project first?
+
+The bundled GeoJSON is in **EPSG:4326** (degrees) for portability. The analysis converts it
+to **EPSG:2263** — NAD83 / New York Long Island, measured in **US survey feet** — so that
+distance, area and buffer operations are meaningful. Buffering or measuring in degrees
+would produce badly distorted numbers.
 
 ---
 
-## 💻 Getting Started
+## 🚀 Quick start
 
-To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-
-Ensure you have Python and `pip` installed:
 ```bash
-pip install --upgrade pip
+git clone https://github.com/BennyLinntu/GIS.git
+cd GIS
+
+python -m venv .venv
+# Windows
+.\.venv\Scripts\Activate.ps1
+# macOS / Linux
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+python gis_analysis.py
 ```
 
-### Installation
+No internet connection is needed: the borough GeoJSON is bundled in [`data/`](data/).
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/BennyLinntu/GIS.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd GIS
-   ```
-3. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Generated files
 
----
+| File | What it is |
+|---|---|
+| `borough_statistics.csv` | Sorted summary table |
+| `borough_statistics.geojson` | Clean GeoJSON with derived metrics |
+| `nybb_analysis.png` | Six-panel static figure |
+| `my_map.html` | Layered interactive Leaflet/Folium map |
 
-## 📈 Usage Example
+### CLI options
 
-Here is a quick example of how you might initialize the map view:
-
-```python
-import gis_module
-
-# Initialize the interactive map
-m = gis_module.create_map(location=[ -41.2865, 174.7762 ], zoom_start=12)
-
-# Load your custom dataset
-gis_module.add_layer(m, data="path/to/data.geojson", color="blue")
-
-# Render the output
-m.save("output_map.html")
+```bash
+python gis_analysis.py --help
+python gis_analysis.py --open-browser      # open the HTML map
+python gis_analysis.py --show-plots        # keep Matplotlib windows open
+python gis_analysis.py --no-map            # skip Folium
+python gis_analysis.py --output-dir output
 ```
-*(You can customize this section based on the exact functions in your repository)*
 
 ---
 
-## 🤝 Contributing
+## 📊 Results
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+The bundled snapshot produces:
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+| Borough | Area (km²) | Boundary (km) | Density (people/km²) | To Brooklyn (km) |
+|---|---:|---:|---:|---:|
+| Queens | 282.92 | 266.87 | 8,502 | 12.96 |
+| Brooklyn | 180.00 | 218.90 | 15,201 | 0.00 |
+| Staten Island | 150.88 | 98.14 | 3,286 | 18.80 |
+| Bronx | 110.28 | 138.05 | 13,354 | 24.08 |
+| Manhattan | 59.13 | 107.30 | 28,653 | 14.81 |
+
+- **Largest:** Queens
+- **Smallest:** Manhattan
+- **Densest:** Manhattan
+- **Total:** 783.21 km² · 8,804,190 people
+
+Numbers can shift slightly with different boundary vintages or simplification tolerances.
 
 ---
 
-## 📬 Contact
+## 🧠 How the code is organized
 
-**Benny (Yida Lin)** - [GitHub Profile](https://github.com/BennyLinntu)
+```mermaid
+flowchart LR
+    A[Bundled GeoJSON<br/>EPSG:4326] --> B[load_boroughs]
+    B --> C[Project to EPSG:2263]
+    C --> D[Area · boundary · centroid · hull · buffers]
+    D --> E[build_summary_table]
+    E --> F[CSV + GeoJSON]
+    D --> G[Matplotlib figure]
+    D --> H[Folium map]
+```
 
-Project Link: [https://github.com/BennyLinntu/GIS](https://github.com/BennyLinntu/GIS)
+The pipeline is split into small pure functions so each stage can be tested:
 
-<br />
+- `load_boroughs()` — load, reproject and derive columns
+- `build_summary_table()` — sorted analysis table
+- `print_analysis()` — terminal summary
+- `create_static_figure()` — six-panel PNG
+- `create_interactive_map()` — layered HTML map
+- `write_outputs()` — CSV, GeoJSON and figure
+- `main()` — CLI orchestration
+
+---
+
+## 🧪 Testing
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+7 tests cover:
+
+- ✅ five boroughs loaded in EPSG:2263
+- ✅ known area values for Queens, Brooklyn and Manhattan
+- ✅ distance / density / convex-hull columns
+- ✅ sorted summary table
+- ✅ buffer and containment flags
+- ✅ CSV, PNG and GeoJSON exports
+- ✅ the interactive map contains all layers
+
+---
+
+## 📁 Project structure
+
+```text
+GIS/
+├── gis_analysis.py              # analysis pipeline + CLI
+├── data/
+│   ├── nyc_boroughs.geojson     # bundled boundaries (simplified)
+│   └── README.md                # source + attribution
+├── tests/test_analysis.py       # 7 offline tests
+├── borough_statistics.csv       # generated summary
+├── borough_statistics.geojson   # generated enriched data
+├── nybb_analysis.png            # generated static figure
+├── my_map.html                  # generated interactive map
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 📚 Data & attribution
+
+- **Boundaries:** NYC Open Data — Borough Boundaries, accessed through
+  [`geodatasets`](https://github.com/geopandas/geodatasets).
+- **Population:** 2020 U.S. Census borough counts.
+- **CRS:** EPSG:2263 for analysis, EPSG:4326 for the bundled GeoJSON.
+- **Simplification:** `0.00008°` tolerance to keep the repository lightweight.
+
+See [`data/README.md`](data/README.md) for details and the NYC Open Data terms.
+
+---
+
+## ⚠️ Notes & limitations
+
+- Boundary length and area depend on the simplification tolerance; this is a teaching
+  dataset, not a surveying product.
+- The 10,000-ft buffer uses a planar approximation in EPSG:2263, appropriate for NYC.
+- Population density uses borough-wide counts, not neighborhood-level data.
+- Folium uses OpenStreetMap tiles, so the **HTML map needs internet access** for its
+  basemap. All Python analysis and tests run offline.
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Bundled, offline dataset
+- [x] Correct projected measurements and buffers
+- [x] CSV / GeoJSON / PNG / HTML exports
+- [x] Interactive layer control and tooltips
+- [x] Offline tests
+- [x] GitHub Actions test workflow
+- [ ] Neighborhood-level (NTAs) analysis
+- [ ] Spatial joins with subway stations or schools
+- [ ] Automated map deployment to GitHub Pages
+
+---
+
+## 👤 Author
+
+**Benny Lin** · [@BennyLinntu](https://github.com/BennyLinntu)
+
+## 📄 License
+
+Code: [MIT](LICENSE). Data: NYC Open Data terms (see above).
+
 <div align="center">
-  <p>If you find this repository helpful, please consider giving it a ⭐!</p>
+  <br />
+  <strong>Maps are arguments. This one starts with the boroughs. 🗺️</strong>
 </div>

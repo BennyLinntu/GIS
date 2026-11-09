@@ -1,6 +1,6 @@
-﻿BoroName,BoroCode,面积(km²),边界长度(km),质心到Brooklyn质心距离(km),10000英尺缓冲区与Brooklyn相交,质心缓冲区完全位于原多边形内
-Queens,4,282.91,273.2,12.96,True,True
-Brooklyn,3,180.0,225.88,0.0,True,False
-Staten Island,5,150.86,100.72,18.8,True,True
-Bronx,2,110.27,141.54,24.08,False,False
-Manhattan,1,59.13,109.51,14.81,True,False
+﻿BoroName,BoroCode,area_sqkm,boundary_km,distance_to_brooklyn_km,population,density_per_sqkm,convex_hull_ratio,buffer_intersects_brooklyn,centroid_buffer_within
+Queens,4,282.92,266.87,12.96,2405464,8502,1.717,True,True
+Brooklyn,3,180.0,218.9,0.0,2736074,15201,1.295,True,False
+Staten Island,5,150.88,98.14,18.8,495747,3286,1.27,True,True
+Bronx,2,110.28,138.05,24.08,1472654,13354,1.397,False,False
+Manhattan,1,59.13,107.3,14.81,1694251,28653,1.726,True,False
